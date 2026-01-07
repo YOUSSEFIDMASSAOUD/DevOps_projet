@@ -3,6 +3,7 @@ name: Pipeline Site HTML
 on:
   push:
     branches: [ "main" ]
+    workflow-dispatch:
 
 jobs:
 
