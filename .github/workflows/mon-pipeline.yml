@@ -1,0 +1,17 @@
+name: Mon Premier Pipeline CI             # Le nom qui apparaîtra sur GitHub
+
+on: [push]                                # "Déclenche-toi à chaque fois que je fais un push"
+
+jobs:                                     # Liste des tâches à faire
+  verification-du-code:                   # Nom de notre tâche
+    runs-on: ubuntu-latest                # Utilise un ordinateur gratuit fourni par GitHub (Linux)
+
+    steps:                                # Les étapes précises de la tâche
+      - name: Recupérer mon code          # Étape A : Copier votre code sur l'ordi de GitHub
+        uses: actions/checkout@v4
+
+      - name: Dire bonjour                # Étape B : Une commande simple pour tester
+        run: echo "Le pipeline fonctionne ! Votre code est bien arrivé sur le serveur."
+
+      - name: Verifier la date            # Étape C : Une autre commande
+        run: date
