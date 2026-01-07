@@ -1,17 +1,39 @@
-name: Mon Premier Pipeline CI             # Le nom qui apparaîtra sur GitHub
+name: Pipeline CI-CD Complet
 
-on: [push]                                # "Déclenche-toi à chaque fois que je fais un push"
 
-jobs:                                     # Liste des tâches à faire
-  verification-du-code:                   # Nom de notre tâche
-    runs-on: ubuntu-latest                # Utilise un ordinateur gratuit fourni par GitHub (Linux)
+on:
+  push:
+    branches: [ "main" ] 
 
-    steps:                                # Les étapes précises de la tâche
-      - name: Recupérer mon code          # Étape A : Copier votre code sur l'ordi de GitHub
+jobs:
+ 
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Récupérer le code
         uses: actions/checkout@v4
 
-      - name: Dire bonjour                # Étape B : Une commande simple pour tester
-        run: echo "Le pipeline fonctionne ! Votre code est bien arrivé sur le serveur."
+      - name: Installer l'environnement (Node.js)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: Verifier la date            # Étape C : Une autre commande
-        run: date
+      - name: Installer les dépendances
+        run: npm install
+
+      - name: Lancer les tests
+        run: npm test 
+
+  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-test 
+    
+    steps:
+      - name: Déploiement vers le serveur
+        run: |
+          echo "Connexion sécurisée en cours..."
+          echo "Transfert des fichiers vers la production..."
+          echo "Redémarrage de l'application..."
+          echo "Succès : Votre site est en ligne !"
