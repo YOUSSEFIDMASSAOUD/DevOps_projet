@@ -26,6 +26,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: verification
+    environment: production
     steps:
       - name: Déploiement
         run: echo "🚀 Votre site HTML est en cours de déploiement sur le serveur !"
